@@ -54,9 +54,9 @@ Position   7: 01111001 = 121 = 'y'
 ## Project Structure
 
 ```
-├── blind_sql_injection.py   # Main extraction script
-├── verify_extraction.py     # Error-correction pass for noisy results
-└── README.md
+- blind_sql_injection.py   # Main extraction script
+- verify_extraction.py     # Error-correction pass for noisy results
+- README.md
 ```
 
 ### `blind_sql_injection.py`
