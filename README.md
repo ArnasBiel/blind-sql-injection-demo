@@ -6,7 +6,7 @@
 
 ## Overview
 
-This project demonstrates a **blind time-based SQL injection attack** against a vulnerable SQLite-backed web application. Unlike error-based or union-based injection, blind time-based injection works even when the application returns no visible errors or data — making it one of the more realistic and challenging attack scenarios.
+This project demonstrates a **blind time-based SQL injection attack** against a vulnerable SQLite-backed web application. Unlike error-based or union-based injection, blind time-based injection works even when the application returns no visible errors or data, making it one of the more realistic and challenging attack scenarios.
 
 The target endpoint was vulnerable because it concatenated user input directly into a SQL query without sanitisation or parameterised queries.
 
@@ -28,7 +28,7 @@ By crafting conditions that test individual **bits** of a target character's ASC
 
 ### Bit-by-Bit Extraction
 
-Each ASCII character is an 8-bit number. For each character position, we send 8 injections — one per bit:
+Each ASCII character is an 8-bit number. For each character position, we send 8 injections (one per bit):
 
 ```sql
 -- Test whether bit N of the character at position P is set
@@ -103,17 +103,17 @@ pip install requests
 
 ## Defense: How to Fix This Vulnerability
 
-The root cause is **string concatenation** in SQL query construction. The fix is straightforward — use **parameterised queries**:
+The root cause is **string concatenation** in SQL query construction. The fix is to use **parameterised queries**:
 
 ```python
-# VULNERABLE ❌
+# VULNERABLE
 query = "SELECT * FROM users WHERE username='" + username + "'"
 
-# SECURE ✅
+# SECURE
 cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
 ```
 
-Parameterised queries ensure user input is always treated as data, never as executable SQL — regardless of what characters it contains.
+Parameterised queries ensure user input is always treated as data, never as executable SQL regardless of what characters it contains.
 
 Additional defences:
 - Apply the **principle of least privilege**: database accounts used by the application should not have access to sensitive tables they don't need.
@@ -136,7 +136,7 @@ Additional defences:
 
 ## Academic Context
 
-Developed as part of a **Web Security** course assignment at Aarhus University. The target server was a purpose-built vulnerable application provided by the course instructors for controlled testing.
+Developed as part of a **Language Based Security** course assignment at Aarhus University. The target server was a purpose-built vulnerable application provided by the course instructors for controlled testing.
 
 ---
 
