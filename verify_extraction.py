@@ -50,7 +50,9 @@ class ExtractionVerifier:
         Check whether the character at a given position matches our expectation.
 
         Injects a NOT-EQUAL condition: if the server delays, the character
-        does NOT match; if the response is fast, it does match.
+        does NOT match; if the response is fast, it does match. The NOT condition
+        is robust to network processing spikes, double checking false positives
+        (correct key characters marked as incorrect)
 
         Args:
             position:      1-based index of the character to verify
