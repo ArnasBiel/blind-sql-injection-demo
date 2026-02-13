@@ -25,7 +25,7 @@ class BlindSQLInjection:
         sanitisation or parameterisation.
     """
 
-    def __init__(self, server, delay_size=60_000_000):
+    def __init__(self, server, delay_size=60000000):
         self.server = server
         self.delay_size = delay_size  # Controls how long randomblob() takes (acts as bit=1 signal)
         self.threshold = 0.42         # Seconds - responses above this indicate TRUE condition
